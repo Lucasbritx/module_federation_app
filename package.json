@@ -1,0 +1,15 @@
+{
+  "name": "module-federation-demo",
+  "version": "1.0.0",
+  "description": "Module Federation Demo with React and Vue",
+  "scripts": {
+    "start": "concurrently \"npm run start:consumer\" \"npm run start:react-provider\" \"npm run start:vue-provider\"",
+    "start:consumer": "cd consumer && npm start",
+    "start:react-provider": "cd provider && npm start",
+    "start:vue-provider": "cd vue-provider && npm start",
+    "install:all": "concurrently \"npm install\" \"cd consumer && npm install\" \"cd provider && npm install\" \"cd vue-provider && npm install\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
+}
