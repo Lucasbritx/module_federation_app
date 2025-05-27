@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import Button from "../../vue-provider/src/components/Button.vue";
 const RemoteButton = React.lazy(() => import("provider/Button"));
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <RemoteButton onClick={() => alert("Federated button clicked!")}>
         Federated Button
       </RemoteButton>
+      <Button onClick={() => alert("Vue button clicked!")}>Vue Button</Button>
     </div>
   );
 }
