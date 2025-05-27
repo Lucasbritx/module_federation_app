@@ -11,16 +11,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "html-webpack-plugin": "^5.6.3",
     "vue": "^3.2.0",
+    "vue-loader": "^17.4.2",
     "webpack": "^5.99.8",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.0.0",
-    "html-webpack-plugin": "^5.6.3"
+    "webpack-dev-server": "^4.0.0"
   },
   "devDependencies": {
-    "babel-loader": "^8.2.2",
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
+    "babel-loader": "^8.2.2",
     "css-loader": "^6.5.1",
     "style-loader": "^3.2.1"
   }
