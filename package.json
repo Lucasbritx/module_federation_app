@@ -6,7 +6,7 @@
     "start": "concurrently \"npm run start:consumer\" \"npm run start:react-provider\" \"npm run start:vue-provider\"",
     "start:consumer": "cd consumer && npm start",
     "start:react-provider": "cd provider && npm start",
-    "start:vue-provider": "cd vue-provider && npm start",
+    "start:vue-provider": "cd vue-provider && npm run serve",
     "install:all": "concurrently \"npm install\" \"cd consumer && npm install\" \"cd provider && npm install\" \"cd vue-provider && npm install\""
   },
   "devDependencies": {
