@@ -33,6 +33,7 @@ module.exports = {
       name: "consumer",
       remotes: {
         provider: "provider@http://localhost:3001/remoteEntry.js",
+        vueApp: "vueApp@http://localhost:8080/remoteEntry.js",
       },
       shared: {
         react: { singleton: true, requiredVersion: "^18.0.0" },
