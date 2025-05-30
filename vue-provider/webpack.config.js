@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
+const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
   entry: "./src/main.js",
@@ -43,6 +44,14 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
+    }),
+    new ModuleFederationPlugin({
+      name: 'vueApp',
+      filename: 'remoteEntry.js',
+      exposes: {
+        "./Button": "./src/components/Button.vue",
+      },
+      shared: { vue: { singleton: true } },
     }),
   ],
 };
