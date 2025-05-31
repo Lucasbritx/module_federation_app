@@ -38,7 +38,7 @@ function App() {
       </RemoteButton>
       {/* TODO add vueButton to decrement counter  */}
       {VueButton ? (
-        <VueWrapper component={VueButton} props={{ text: "Clique aqui" }} />
+        <VueWrapper component={VueButton} props={{ label: "Click here to decrement" }} />
       ) : (
         <p>Carregando botão Vue...</p>
       )}
