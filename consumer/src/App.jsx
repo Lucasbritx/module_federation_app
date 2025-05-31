@@ -32,9 +32,11 @@ function App() {
           Increment count inside Consumer
         </button>
       </div>
+      {/* TODO add remote button to clear store */}
       <RemoteButton onClick={() => alert("Federated button clicked!")}>
         Federated Button
       </RemoteButton>
+      {/* TODO add vueButton to decrement counter  */}
       {VueButton ? (
         <VueWrapper component={VueButton} props={{ text: "Clique aqui" }} />
       ) : (
