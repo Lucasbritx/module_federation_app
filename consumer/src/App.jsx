@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VueWrapper from "./VueWrapper.jsx";
 const RemoteButton = React.lazy(() => import("provider/Button"));
+import { sharedStore } from "../../shared/sharedStore.js";
 
 const loadVueComponent = async () => {
   const module = await import("vueApp/Button");
@@ -9,6 +10,14 @@ const loadVueComponent = async () => {
 
 function App() {
   const [VueButton, setVueButton] = useState(null);
+  const [count, setCount] = useState(sharedStore.getState().count);
+
+  useEffect(() => {
+    const unsubscribe = sharedStore.subscribe((newState) => {
+      setCount(newState.count);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     loadVueComponent().then(setVueButton);
@@ -16,6 +25,10 @@ function App() {
   return (
     <div>
       <span>Hello from Consumer Application</span>
+      <p>Shared Count: {count}</p>
+      <button onClick={() => sharedStore.getState().increment()}>
+        Increment count inside Consumer
+      </button>
       <RemoteButton onClick={() => alert("Federated button clicked!")}>
         Federated Button
       </RemoteButton>
