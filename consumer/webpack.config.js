@@ -35,6 +35,9 @@ module.exports = {
         provider: "provider@http://localhost:3001/remoteEntry.js",
         vueApp: "vueApp@http://localhost:8080/remoteEntry.js",
       },
+      exposes: {
+        "./store": "./src/store.js",
+      },
       shared: {
         react: { singleton: true, requiredVersion: "^18.0.0" },
         "react-dom": { singleton: true, requiredVersion: "^18.0.0" },
