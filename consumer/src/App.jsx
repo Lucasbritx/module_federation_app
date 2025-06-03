@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VueWrapper from "./VueWrapper.jsx";
 const RemoteButton = React.lazy(() => import("provider/Button"));
-import { sharedStore } from "../../shared/sharedStore.js";
+import { getSharedStore } from "../../shared/sharedStore.js";
 import "./index.css";
 
 const loadVueComponent = async () => {
@@ -11,10 +11,13 @@ const loadVueComponent = async () => {
 
 function App() {
   const [VueButton, setVueButton] = useState(null);
-  const [count, setCount] = useState(sharedStore.getState().count);
+
+  const store = getSharedStore();
+
+  const [count, setCount] = useState(store.getState().count);
 
   useEffect(() => {
-    const unsubscribe = sharedStore.subscribe((newState) => {
+    const unsubscribe = store.subscribe((newState) => {
       setCount(newState.count);
     });
     return () => unsubscribe();
@@ -28,7 +31,7 @@ function App() {
       <div className="consumer-container">
         <span>Hello from Consumer Application</span>
         <p>Shared Count: {count}</p>
-        <button onClick={() => sharedStore.getState().increment()}>
+        <button onClick={() => store.increment()}>
           Increment count inside Consumer
         </button>
       </div>
@@ -38,7 +41,10 @@ function App() {
       </RemoteButton>
       {/* TODO add vueButton to decrement counter  */}
       {VueButton ? (
-        <VueWrapper component={VueButton} props={{ label: "Click here to decrement" }} />
+        <VueWrapper
+          component={VueButton}
+          props={{ label: "Click here to decrement" }}
+        />
       ) : (
         <p>Carregando botão Vue...</p>
       )}
