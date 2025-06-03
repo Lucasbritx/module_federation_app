@@ -4,4 +4,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 8px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+button {
+    padding: 4px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
