@@ -15,12 +15,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         loader: "babel-loader",
         exclude: /node_modules/,
-        options: {
-          presets: ["@babel/preset-react", "@babel/preset-env"],
-        },
       },
       {
         test: /\.css$/,
@@ -36,11 +33,13 @@ module.exports = {
         vueApp: "vueApp@http://localhost:8080/remoteEntry.js",
       },
       exposes: {
-        "./store": "./src/store.js",
+        "./sharedStore": "./src/shared/sharedStore.js",
       },
       shared: {
         react: { singleton: true, requiredVersion: "^18.0.0" },
         "react-dom": { singleton: true, requiredVersion: "^18.0.0" },
+        zustand: { singleton: true },
+        "zustand/vanilla": { singleton: true },
       },
     }),
     new HtmlWebpackPlugin({
