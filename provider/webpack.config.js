@@ -32,6 +32,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "provider",
       filename: "remoteEntry.js",
+      remotes: {
+        consumer: "consumer@http://localhost:3000/remoteEntry.js",
+      },
       exposes: {
         "./Button": "./src/components/Button.jsx",
       },
