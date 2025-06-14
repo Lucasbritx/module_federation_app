@@ -12,12 +12,22 @@ module.exports = {
   output: {
     publicPath: "http://localhost:3000/",
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         loader: "babel-loader",
         exclude: /node_modules/,
+        options: {
+          presets: [
+            ["@babel/preset-env", { modules: false }],
+            "@babel/preset-react"
+          ],
+          cacheDirectory: true
+        },
       },
       {
         test: /\.css$/,
