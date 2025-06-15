@@ -1,12 +1,25 @@
-import React from "react";
-//import { sharedStore } from "consumer/sharedStore";
+import React, { useState, useEffect } from "react";
+import store from "consumer/sharedStore";
 
 const Button = () => {
+  const [count, setCount] = useState(store.getState().count);
+
+  useEffect(() => {
+    const unsubscribe = store.subscribe((newState) => {
+      setCount(newState.count);
+    });
+    return () => unsubscribe();
+  }, []);
+
   const handleClick = () => {
-    //sharedStore.increment();
-    //console.log("Count:", sharedStore.getState().count);
+    store.getState().increment();
   };
-  return <button>Provider Increment</button>;
+
+  return (
+    <button onClick={handleClick}>
+      Provider Increment {count}
+    </button>
+  );
 };
 
 export default Button;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VueWrapper from "./VueWrapper.jsx";
 const RemoteButton = React.lazy(() => import("provider/Button"));
-import sharedStore from "./shared/sharedStore.js";
+import store from "./shared/sharedStore.js";
 import "./index.css";
 
 const loadVueComponent = async () => {
@@ -12,12 +12,10 @@ const loadVueComponent = async () => {
 function App() {
   const [VueButton, setVueButton] = useState(null);
 
-  console.log("Shared Store:", sharedStore);
-
-  const [count, setCount] = useState(sharedStore.getState().count);
+  const [count, setCount] = useState(store.getState().count);
 
   useEffect(() => {
-    const unsubscribe = sharedStore.subscribe((newState) => {
+    const unsubscribe = store.subscribe((newState) => {
       setCount(newState.count);
     });
     return () => unsubscribe();
@@ -26,26 +24,37 @@ function App() {
   useEffect(() => {
     loadVueComponent().then(setVueButton);
   }, []);
+
+  const handleIncrement = () => {
+    store.getState().increment();
+  };
+
+  const handleDecrement = () => {
+    store.getState().decrement();
+  };
+
+  const handleReset = () => {
+    store.getState().reset();
+  };
+
   return (
     <div>
       <div className="consumer-container">
         <span>Hello from Consumer Application</span>
         <p>Shared Count: {count}</p>
         <div className="buttons-container">
-          <button onClick={() => sharedStore.reset()}>Reset count</button>
-          <button onClick={() => sharedStore.increment()}>
+          <button onClick={handleReset}>Reset count</button>
+          <button onClick={handleIncrement}>
             Increment count inside Consumer
           </button>
-          <button onClick={() => sharedStore.decrement()}>
+          <button onClick={handleDecrement}>
             Decrement count inside Consumer
           </button>
         </div>
       </div>
-      {/* TODO add remote button to clear store */}
       <RemoteButton onClick={() => alert("Federated button clicked!")}>
         Federated Button
       </RemoteButton>
-      {/* TODO add vueButton to decrement counter  */}
       {VueButton ? (
         <VueWrapper
           component={VueButton}
