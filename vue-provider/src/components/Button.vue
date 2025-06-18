@@ -1,8 +1,10 @@
 <template>
+  
   <button @click="handleClick">{{ label }}</button>
 </template>
 
 <script>
+import store from "consumer/sharedStore";
 export default {
   name: 'Button',
   props: {
@@ -14,6 +16,7 @@ export default {
   methods: {
     handleClick() {
       this.$emit('click');
+      store.dispatch('increment');
     }
   }
 }
