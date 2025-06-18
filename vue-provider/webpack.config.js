@@ -48,6 +48,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'vueApp',
       filename: 'remoteEntry.js',
+      remotes: {
+        consumer: "consumer@http://localhost:3000/remoteEntry.js",
+      },
       exposes: {
         "./Button": "./src/components/Button.vue",
       },
